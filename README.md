@@ -1,8 +1,8 @@
-# React Apollo
+# Nhost React Apollo
 
-Make it easy to use Nhost with React and Apollo.
+Make it easy to use [Nhost](https://nhost.io/) with [React](https://reactjs.org/) and [Apollo](https://github.com/apollographql/apollo-client).
 
-It's highle recommended to use this package together with `@nhost/react-auth` to automatically handle authentication.
+It's highly recommended to use this package together with `@nhost/react-auth` to automatically handle authentication.
 
 - `NhostApolloProvider` - ApolloProvider preconfigured with authentication for GraphQL mutations, queries and subscriptions.
 
