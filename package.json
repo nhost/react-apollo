@@ -43,6 +43,7 @@
     "subscriptions-transport-ws": "^0.9.17"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "np": {
