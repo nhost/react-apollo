@@ -4,5 +4,6 @@ export function NhostApolloProvider(
   headers?: {
     [key: string]: any;
   },
-  publicRole?: string
+  publicRole?: string,
+  cache?: any,
 ): JSX.Element;

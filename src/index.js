@@ -11,7 +11,8 @@ export function generateApolloClient(
   auth,
   gqlEndpoint,
   headers,
-  publicRole = "public"
+  publicRole = "public",
+  cache
 ) {
   const getheaders = (auth) => {
     // add headers
@@ -82,7 +83,7 @@ export function generateApolloClient(
   const client = new ApolloClient({
     ssr: ssr,
     link: from([link]),
-    cache: new InMemoryCache(),
+    cache: cache || new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
         fetchPolicy: "cache-and-network",
@@ -97,12 +98,13 @@ export class NhostApolloProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    const { auth, gqlEndpoint, headers, publicRole = "public" } = this.props;
+    const { auth, gqlEndpoint, headers, publicRole = "public", cache } = this.props;
     const { client, wsLink } = generateApolloClient(
       auth,
       gqlEndpoint,
       headers,
-      publicRole
+      publicRole,
+      cache
     );
     this.client = client;
     this.wsLink = wsLink;
