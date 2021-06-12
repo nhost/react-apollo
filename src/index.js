@@ -162,8 +162,8 @@ export class NhostApolloProvider extends React.Component {
         }
         if (!data) {
           await client.resetStore().catch((error) => {
-            console.log("Error resetting Apollo client cache");
-            console.log(error);
+            console.error("Error resetting Apollo client cache");
+            console.error(error);
           });
         }
       });
