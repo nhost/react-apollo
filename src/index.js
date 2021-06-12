@@ -1,11 +1,15 @@
-import React, { createContext, useContext } from "react";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider, ApolloClient } from "@apollo/client";
-import { setContext } from "@apollo/link-context";
-import { WebSocketLink } from "apollo-link-ws";
-import { createHttpLink } from "apollo-link-http";
-import { from, split } from "apollo-link";
-import { getMainDefinition } from "apollo-utilities";
+import React from "react";
+import {
+  ApolloProvider,
+  ApolloClient,
+  createHttpLink,
+  split,
+  InMemoryCache,
+  from,
+} from "@apollo/client";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { setContext } from "@apollo/client/link/context";
 
 export function generateApolloClient(
   auth,
@@ -98,7 +102,13 @@ export class NhostApolloProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    const { auth, gqlEndpoint, headers, publicRole = "public", cache } = this.props;
+    const {
+      auth,
+      gqlEndpoint,
+      headers,
+      publicRole = "public",
+      cache,
+    } = this.props;
     const { client, wsLink } = generateApolloClient(
       auth,
       gqlEndpoint,
@@ -151,6 +161,7 @@ export class NhostApolloProvider extends React.Component {
   }
 
   render() {
+    console.log("wrap render...");
     return (
       <ApolloProvider client={this.client}>
         {this.props.children}
