@@ -19,6 +19,7 @@ export function generateApolloClient({
   publicRole = "public",
   cache,
   connectToDevTools = false,
+  customOnError: onError,
 }) {
   const getheaders = (auth) => {
     // add headers
@@ -86,22 +87,23 @@ export function generateApolloClient({
       )
     : httplink;
 
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    console.log("inside onError");
+  const errorLink = onError((args) => {
+    customOnError(args);
+    // console.log("inside onError");
 
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
+    // if (graphQLErrors)
+    //   graphQLErrors.forEach(({ message, locations, path }) =>
+    //     console.log(
+    //       `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+    //     )
+    //   );
 
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    // if (networkError) console.log(`[Network error]: ${networkError}`);
   });
 
   const client = new ApolloClient({
     ssr: ssr,
-    link: from([link]),
+    link: from([errorLink, link]),
     cache: cache || new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
@@ -125,6 +127,7 @@ export class NhostApolloProvider extends React.Component {
       publicRole = "public",
       cache,
       connectToDevTools,
+      onError,
     } = this.props;
     const { client, wsLink } = generateApolloClient({
       auth,
@@ -133,6 +136,7 @@ export class NhostApolloProvider extends React.Component {
       publicRole,
       cache,
       connectToDevTools,
+      onError,
     });
     this.client = client;
     this.wsLink = wsLink;
