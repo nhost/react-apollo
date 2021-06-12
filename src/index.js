@@ -7,6 +7,7 @@ import {
   InMemoryCache,
   from,
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/client/link/context";
@@ -84,6 +85,19 @@ export function generateApolloClient({
         authLink.concat(httplink)
       )
     : httplink;
+
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    console.log("inside onError");
+
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      );
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
 
   const client = new ApolloClient({
     ssr: ssr,
@@ -171,7 +185,6 @@ export class NhostApolloProvider extends React.Component {
   }
 
   render() {
-    console.log("wrap render...");
     return (
       <ApolloProvider client={this.client}>
         {this.props.children}
