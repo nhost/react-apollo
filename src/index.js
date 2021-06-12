@@ -152,13 +152,19 @@ export class NhostApolloProvider extends React.Component {
         }
       });
 
-      this.props.auth.onAuthStateChanged((data) => {
+      this.props.auth.onAuthStateChanged(async (data) => {
         // reconnect ws connection with new auth headers for the logged in/out user
         if (this.wsLink.subscriptionClient.status === 1) {
           // must close first to avoid race conditions
           this.wsLink.subscriptionClient.close();
           // reconnect
           this.wsLink.subscriptionClient.tryReconnect();
+        }
+        if (!data) {
+          await client.resetStore().catch((error) => {
+            console.error("Error resetting Apollo client cache");
+            console.error(error);
+          });
         }
       });
     }
