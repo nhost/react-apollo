@@ -19,7 +19,7 @@ export function generateApolloClient({
   publicRole = "public",
   cache,
   connectToDevTools = false,
-  customOnError: onError,
+  onError: customOnError,
 }) {
   const getheaders = (auth) => {
     // add headers
