@@ -19,9 +19,6 @@ export function generateApolloClient({
   cache,
   connectToDevTools = false,
 }) {
-  console.log("connect to dev tools");
-  console.log({ connectToDevTools });
-
   const getheaders = (auth) => {
     // add headers
     const resHeaders = {
