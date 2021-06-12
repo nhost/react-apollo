@@ -7,7 +7,6 @@ import {
   InMemoryCache,
   from,
 } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/client/link/context";
@@ -19,7 +18,7 @@ export function generateApolloClient({
   publicRole = "public",
   cache,
   connectToDevTools = false,
-  onError: customOnError,
+  onError,
 }) {
   const getheaders = (auth) => {
     // add headers
@@ -87,23 +86,8 @@ export function generateApolloClient({
       )
     : httplink;
 
-  const errorLink = onError((args) => {
-    customOnError(args);
-    // console.log("inside onError");
-
-    // if (graphQLErrors)
-    //   graphQLErrors.forEach(({ message, locations, path }) =>
-    //     console.log(
-    //       `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-    //     )
-    //   );
-
-    // if (networkError) console.log(`[Network error]: ${networkError}`);
-  });
-
-  const client = new ApolloClient({
+  const apolloClientOptions = {
     ssr: ssr,
-    link: from([errorLink, link]),
     cache: cache || new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
@@ -111,7 +95,16 @@ export function generateApolloClient({
       },
     },
     connectToDevTools,
-  });
+  };
+
+  // add link
+  if (typeof onError === "function") {
+    apolloClientOptions.link = from([onError, link]);
+  } else {
+    apolloClientOptions.link = from([link]);
+  }
+
+  const client = new ApolloClient(apolloClientOptions);
 
   return { client, wsLink };
 }
