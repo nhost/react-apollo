@@ -1,5 +1,5 @@
-import type { ApolloClient } from '@apollo/client';
-import type { WebSocketLink } from 'apollo-link-ws';
+import type { ApolloClient } from "@apollo/client";
+import type { WebSocketLink } from "apollo-link-ws";
 
 export function generateApolloClient(
   auth?: any,
@@ -9,6 +9,7 @@ export function generateApolloClient(
   },
   publicRole?: string,
   cache?: any,
+  connectToDevTools?: boolean
 ): {
   client: ApolloClient;
   wsLink: WebSocketLink | null;
@@ -22,4 +23,5 @@ export function NhostApolloProvider(
   },
   publicRole?: string,
   cache?: any,
+  connectToDevTools?: boolean
 ): JSX.Element;
