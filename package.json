@@ -34,9 +34,7 @@
     "react": "^16.6.1 || ^17.0.0",
     "react-dom": "^16.6.3 || ^17.0.0"
   },
-  "dependencies": {
-    "subscriptions-transport-ws": "^0.9.17"
-  },
+  "dependencies": {},
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
