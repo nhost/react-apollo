@@ -18,6 +18,7 @@ export function generateApolloClient({
   publicRole = "public",
   cache,
   connectToDevTools = false,
+  onError,
 }) {
   const getheaders = (auth) => {
     // add headers
@@ -85,9 +86,8 @@ export function generateApolloClient({
       )
     : httplink;
 
-  const client = new ApolloClient({
+  const apolloClientOptions = {
     ssr: ssr,
-    link: from([link]),
     cache: cache || new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
@@ -95,7 +95,16 @@ export function generateApolloClient({
       },
     },
     connectToDevTools,
-  });
+  };
+
+  // add link
+  if (typeof onError === "function") {
+    apolloClientOptions.link = from([onError, link]);
+  } else {
+    apolloClientOptions.link = from([link]);
+  }
+
+  const client = new ApolloClient(apolloClientOptions);
 
   return { client, wsLink };
 }
@@ -111,6 +120,7 @@ export class NhostApolloProvider extends React.Component {
       publicRole = "public",
       cache,
       connectToDevTools,
+      onError,
     } = this.props;
     const { client, wsLink } = generateApolloClient({
       auth,
@@ -119,6 +129,7 @@ export class NhostApolloProvider extends React.Component {
       publicRole,
       cache,
       connectToDevTools,
+      onError,
     });
     this.client = client;
     this.wsLink = wsLink;
@@ -171,7 +182,6 @@ export class NhostApolloProvider extends React.Component {
   }
 
   render() {
-    console.log("wrap render...");
     return (
       <ApolloProvider client={this.client}>
         {this.props.children}
