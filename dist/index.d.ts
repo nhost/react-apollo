@@ -10,7 +10,7 @@ export function generateApolloClient(
   publicRole?: string,
   cache?: any,
   connectToDevTools?: boolean,
-  onError: () => void
+  onError?: () => unknown
 ): {
   client: ApolloClient;
   wsLink: WebSocketLink | null;
@@ -25,5 +25,5 @@ export function NhostApolloProvider(
   publicRole?: string,
   cache?: any,
   connectToDevTools?: boolean,
-  onError: () => void
+  onError?: () => unknown
 ): JSX.Element;
