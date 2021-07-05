@@ -38,9 +38,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
-  },
-  "np": {
-    "yarn": true,
-    "contents": "/dist"
   }
 }
