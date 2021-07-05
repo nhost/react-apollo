@@ -12,11 +12,8 @@
     "build": "./node_modules/.bin/babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nhost/react-apollo.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/nhost/react-apollo.git",
+  "author": "elitan <johan@nhost.io>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nhost/react-apollo/issues"
