@@ -1,17 +1,25 @@
 import type { ApolloClient } from "@apollo/client";
 import type { WebSocketLink } from "apollo-link-ws";
 
-export function generateApolloClient(
-  auth?: any,
-  gqlEndpoint: string,
+export function generateApolloClient({
+  auth,
+  gqlEndpoint,
+  headers,
+  publicRole,
+  cache,
+  connectToDevTools,
+  onError,
+}: {
+  auth?: any;
+  gqlEndpoint: string;
   headers?: {
     [key: string]: any;
-  },
-  publicRole?: string,
-  cache?: any,
-  connectToDevTools?: boolean,
-  onError?: () => unknown
-): {
+  };
+  publicRole?: string;
+  cache?: any;
+  connectToDevTools?: boolean;
+  onError?: () => unknown;
+}): {
   client: ApolloClient;
   wsLink: WebSocketLink | null;
 };
