@@ -11,6 +11,12 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/client/link/context";
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "cache-and-network",
+  }
+}
+
 export function generateApolloClient({
   auth,
   gqlEndpoint,
@@ -19,6 +25,7 @@ export function generateApolloClient({
   cache,
   connectToDevTools = false,
   onError,
+  defaultOptions = defaultOptions,
 }) {
   const getheaders = (auth) => {
     // add headers
@@ -89,11 +96,7 @@ export function generateApolloClient({
   const apolloClientOptions = {
     ssr: ssr,
     cache: cache || new InMemoryCache(),
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: "cache-and-network",
-      },
-    },
+    defaultOptions: defaultOptions,
     connectToDevTools,
   };
 
@@ -121,6 +124,7 @@ export class NhostApolloProvider extends React.Component {
       cache,
       connectToDevTools,
       onError,
+      defaultOptions,
     } = this.props;
     const { client, wsLink } = generateApolloClient({
       auth,
@@ -130,6 +134,7 @@ export class NhostApolloProvider extends React.Component {
       cache,
       connectToDevTools,
       onError,
+      defaultOptions,
     });
     this.client = client;
     this.wsLink = wsLink;
