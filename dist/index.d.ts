@@ -9,6 +9,7 @@ export function generateApolloClient({
   cache,
   connectToDevTools,
   onError,
+  defaultOptions,
 }: {
   auth?: any;
   gqlEndpoint: string;
@@ -19,6 +20,7 @@ export function generateApolloClient({
   cache?: any;
   connectToDevTools?: boolean;
   onError?: () => unknown;
+  defaultOptions?: any;
 }): {
   client: ApolloClient;
   wsLink: WebSocketLink | null;
@@ -33,5 +35,6 @@ export function NhostApolloProvider(
   publicRole?: string,
   cache?: any,
   connectToDevTools?: boolean,
-  onError?: () => unknown
+  onError?: () => unknown,
+  defaultOptions?: any,
 ): JSX.Element;
