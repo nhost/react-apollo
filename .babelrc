@@ -1,8 +1,0 @@
-{
-  "presets": ["@babel/preset-react", "@babel/preset-env"],
-  "plugins": ["@babel/plugin-transform-regenerator", ["@babel/plugin-transform-runtime", {
-    "helpers": true,
-    "regenerator": true
-  }] ],
-  "comments": false
-}
