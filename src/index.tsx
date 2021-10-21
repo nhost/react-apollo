@@ -18,7 +18,7 @@ import { NhostClient } from '@nhost/nhost-js';
 const isBrowser = () => typeof window !== 'undefined';
 
 type GenerateApolloClientOptions = {
-  nhost: NhostClient;
+  nhost?: NhostClient;
   graphqlUrl?: string;
   headers: any;
   publicRole: string;
@@ -50,7 +50,7 @@ function generateApolloClient({
 
     // add auth headers if signed in
     // or add 'public' role if not signed in
-    if (nhost.auth.isAuthenticated()) {
+    if (nhost?.auth.isAuthenticated()) {
       resHeaders.authorization = `Bearer ${nhost.auth.getAccessToken()}`;
     } else {
       resHeaders.role = publicRole;
@@ -59,7 +59,14 @@ function generateApolloClient({
     return resHeaders;
   };
 
-  const uri = graphqlUrl ? graphqlUrl : nhost.getGraphqlUrl();
+  let uri = '';
+  if (graphqlUrl) {
+    uri = graphqlUrl;
+  } else if (nhost) {
+    uri = nhost.getGraphqlUrl();
+  } else {
+    throw new Error('no GraphQL URL');
+  }
 
   const wsUri = uri.startsWith('https')
     ? uri.replace(/^https/, 'wss')
@@ -136,7 +143,7 @@ function generateApolloClient({
 }
 
 type NhostApolloProviderProps = {
-  nhost: NhostClient;
+  nhost?: NhostClient;
   graphqlUrl?: string;
   children: ReactNode;
   headers?: any;
@@ -182,7 +189,7 @@ export function NhostApolloProvider({
       return;
     }
 
-    if (nhost.auth && webSocketClient) {
+    if (nhost && webSocketClient) {
       nhost.auth.onTokenChanged(() => {
         if (webSocketClient.status === 1) {
           //@ts-ignore
