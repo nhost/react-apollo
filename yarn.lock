@@ -25,30 +25,30 @@
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
 
-"@nhost/hasura-auth-js@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@nhost/hasura-auth-js/-/hasura-auth-js-0.0.11.tgz#77ccf2a18bdb2f2dfd137e4892519086308d6ff8"
-  integrity sha512-UjUWfSwgSEE11ZFc/sILIi7DiosGTZZ93sP/xnvBWqoYjpJZr+t/d3TA4tQLDPXYs7HcDiDC4F+yJZQiICx1bQ==
+"@nhost/hasura-auth-js@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@nhost/hasura-auth-js/-/hasura-auth-js-0.0.12.tgz#1e29ae1ac1ed0d064f7572e5b8162381b77501ff"
+  integrity sha512-lZ66uv277P7s/q/nJ2faOuv6glwhyR0cu1rQ/WaMQD3VQnwZY1SxzmZuIzgmbjSAZRjHYQp6jET7jovqyF37fQ==
   dependencies:
     "@types/jwt-decode" "^2.2.1"
     axios "^0.21.1"
     jwt-decode "^2.2.0"
     query-string "^7.0.1"
 
-"@nhost/hasura-storage-js@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@nhost/hasura-storage-js/-/hasura-storage-js-0.0.3.tgz#e966940483d7283d63042fb26fd0e12c149b95f2"
-  integrity sha512-OR1QRTBqocqU1DSDB9wQ4rXsAMQBYz15raBQAQgY+ajiFxXBsSCzuEcThXm6Jd0PT7yBrRVxJrXI+e6Rm3dybw==
+"@nhost/hasura-storage-js@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@nhost/hasura-storage-js/-/hasura-storage-js-0.0.5.tgz#de085189c582960194c0cc0b2bc2f096affc2168"
+  integrity sha512-6XDm57bt0f2skeglinP4HCUsWbyipb+8MZLld5XPqxaNTM4lUs7QlY1VLOcukL91YnF6IC4kZYYD9ge+on6JUg==
   dependencies:
     axios "^0.21.1"
 
-"@nhost/nhost-js@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@nhost/nhost-js/-/nhost-js-0.0.14.tgz#30d97e8a37fc1a63011085830789e7e5edda3de1"
-  integrity sha512-nshdEy6f8ByZl2NpmRYMYUhHHEVpf/OF6ykroyLYyo//1J5fCt/L2UO2nO8xuhD/kEy3TJ700ywRLjaMDoZDjQ==
+"@nhost/nhost-js@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@nhost/nhost-js/-/nhost-js-0.1.0.tgz#5e5e0016c21f4e493a4c36eab6f62583e3ec48e0"
+  integrity sha512-K0ROp0A8hOXiJPAA2eYlAeMVdhOiXjeOnk6B+zxBkgPSK3OFrCm4OJbgZArYaOD1IsM8U3bYdu+Z2ibIMz7dVg==
   dependencies:
-    "@nhost/hasura-auth-js" "^0.0.11"
-    "@nhost/hasura-storage-js" "^0.0.3"
+    "@nhost/hasura-auth-js" "^0.0.12"
+    "@nhost/hasura-storage-js" "^0.0.5"
     axios "^0.21.1"
     jwt-decode "^3.1.2"
     query-string "^7.0.1"

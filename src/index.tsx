@@ -63,7 +63,7 @@ function generateApolloClient({
   if (graphqlUrl) {
     uri = graphqlUrl;
   } else if (nhost) {
-    uri = nhost.getGraphqlUrl();
+    uri = nhost.graphql.getUrl();
   } else {
     throw new Error('no GraphQL URL');
   }
