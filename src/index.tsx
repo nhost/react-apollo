@@ -23,7 +23,7 @@ type GenerateApolloClientOptions = {
   graphqlUrl?: string;
   headers: any;
   publicRole: string;
-  fetchPolicy: WatchQueryFetchPolicy;
+  fetchPolicy: WatchQueryFetchPolicy | undefined;
   connectToDevTools: boolean;
   cache: InMemoryCache;
   onError?: RequestHandler;
@@ -151,7 +151,7 @@ type NhostApolloProviderProps = {
   children: ReactNode;
   headers?: any;
   publicRole?: string;
-  fetchPolicy?: WatchQueryFetchPolicy;
+  fetchPolicy?: WatchQueryFetchPolicy | undefined;
   connectToDevTools?: boolean;
   cache?: InMemoryCache;
   onError?: RequestHandler;
@@ -163,7 +163,7 @@ export function NhostApolloProvider({
   children,
   headers = {},
   publicRole = 'public',
-  fetchPolicy = 'cache-and-network',
+  fetchPolicy,
   cache = new InMemoryCache(),
   connectToDevTools = false,
   onError,
