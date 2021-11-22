@@ -151,7 +151,7 @@ type NhostApolloProviderProps = {
   children: ReactNode;
   headers?: any;
   publicRole?: string;
-  fetchPolicy: WatchQueryFetchPolicy;
+  fetchPolicy?: WatchQueryFetchPolicy;
   connectToDevTools?: boolean;
   cache?: InMemoryCache;
   onError?: RequestHandler;
