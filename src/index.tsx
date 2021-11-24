@@ -8,6 +8,7 @@ import {
   from,
   ApolloClientOptions,
   RequestHandler,
+  WatchQueryFetchPolicy,
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -22,6 +23,7 @@ type GenerateApolloClientOptions = {
   graphqlUrl?: string;
   headers: any;
   publicRole: string;
+  fetchPolicy: WatchQueryFetchPolicy | undefined;
   connectToDevTools: boolean;
   cache: InMemoryCache;
   onError?: RequestHandler;
@@ -31,7 +33,8 @@ function generateApolloClient({
   nhost,
   graphqlUrl,
   headers,
-  publicRole = 'public',
+  publicRole,
+  fetchPolicy,
   cache,
   connectToDevTools,
   onError,
@@ -124,7 +127,7 @@ function generateApolloClient({
     ssrMode: !isBrowser(),
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy,
       },
     },
     connectToDevTools,
@@ -148,6 +151,7 @@ type NhostApolloProviderProps = {
   children: ReactNode;
   headers?: any;
   publicRole?: string;
+  fetchPolicy?: WatchQueryFetchPolicy | undefined;
   connectToDevTools?: boolean;
   cache?: InMemoryCache;
   onError?: RequestHandler;
@@ -159,6 +163,7 @@ export function NhostApolloProvider({
   children,
   headers = {},
   publicRole = 'public',
+  fetchPolicy,
   cache = new InMemoryCache(),
   connectToDevTools = false,
   onError,
@@ -176,6 +181,7 @@ export function NhostApolloProvider({
       nhost,
       headers,
       publicRole,
+      fetchPolicy,
       cache,
       connectToDevTools,
       onError,
