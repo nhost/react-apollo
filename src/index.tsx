@@ -96,10 +96,11 @@ function generateApolloClient({
     uri,
   });
 
-  const authLink = setContext(() => {
+  const authLink = setContext((_, previousContext) => {
     return {
       headers: {
         ...getAuthHeaders(),
+        ...(previousContext?.headers || {}),
       },
     };
   });
