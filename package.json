@@ -1,18 +1,44 @@
 {
   "name": "@nhost/react-apollo",
   "version": "2.1.0",
+  "description": "Nhost React Apollo client",
+  "license": "MIT",
+  "keywords": [
+    "nhost",
+    "hasura",
+    "storage",
+    "auth",
+    "authentication",
+    "graphql",
+    "postgresql",
+    "realtime",
+    "react",
+    "apollo"
+  ],
+  "author": "Nhost",
+  "homepage": "https://nhost.io",
+  "bugs": "https://github.com/nhost/react-apollo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhost/react-apollo.git"
+  },
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
-  "repository": "git@github.com:nhost/react-apollo.git",
-  "license": "MIT",
   "files": [
     "/lib"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
+  "dependencies": {
+    "subscriptions-transport-ws": "^0.11.0"
   },
   "peerDependencies": {
     "@apollo/client": "^3.0.0",
@@ -31,12 +57,5 @@
     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "typescript": "^4.5.2"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "dependencies": {
-    "subscriptions-transport-ws": "^0.11.0"
   }
 }
