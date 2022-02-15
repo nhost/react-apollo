@@ -1,3 +1,9 @@
+# Disclaimer
+
+This package is now part of our [monorepo](https://github.com/nhost/nhost)
+
+------
+
 # Nhost React Apollo
 
 For easy usage of Apollo and React with [Nhost](https://nhost.io).
